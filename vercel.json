@@ -1,11 +1,17 @@
 {
   "builds": [
     { "src": "next.config.mjs", "use": "@vercel/next" },
-    { "src": "api/*.py", "use": "@vercel/python" }
+    { "src": "api/rembg.py", "use": "@vercel/python" }
   ],
   "routes": [
-    { "src": "/api/rembg(.*)", "dest": "/api/rembg.py" }
-  ]
+    { "src": "/api/rembg/(.*)", "dest": "/api/rembg" }
+  ],
+  "functions": {
+    "api/rembg.py": {
+      "runtime": "python3.9"
+    }
+  }
 }
+
 
 
