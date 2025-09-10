@@ -1,17 +1,28 @@
 {
+  "version": 2,
   "builds": [
-    { "src": "next.config.mjs", "use": "@vercel/next" },
-    { "src": "api/rembg.py", "use": "@vercel/python" }
+    {
+      "src": "api/rembg.py",
+      "use": "@vercel/python"
+    }
   ],
   "routes": [
-    { "src": "/api/rembg/(.*)", "dest": "/api/rembg" }
+    {
+      "src": "/api/rembg/(.*)",
+      "dest": "/api/rembg"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/rembg"
+    }
   ],
   "functions": {
     "api/rembg.py": {
-      "runtime": "python3.9"
+      "runtime": "python3.9",
+      "maxDuration": 30
     }
+  },
+  "env": {
+    "PYTHONPATH": "/var/task"
   }
 }
-
-
-
